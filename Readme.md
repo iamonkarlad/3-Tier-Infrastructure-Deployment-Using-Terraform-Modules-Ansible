@@ -283,7 +283,7 @@ mysql -h terraform-20260128080025515100000004.c4ji0qekmizd.us-east-1.rds.amazona
 
 ```bash
 show database;
-use database;
+use mydatabase;
 ```
 
 - Create Table `users` inside `mydatabase`
