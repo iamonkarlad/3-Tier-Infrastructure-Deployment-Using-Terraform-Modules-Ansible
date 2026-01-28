@@ -1,0 +1,81 @@
+---
+############################
+# WEB TIER (NGINX PROXY)
+############################
+- name: Configure Web Tier (NGINX Reverse Proxy)
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Install NGINX
+      yum:
+        name: nginx
+        state: present
+
+    - name: Create NGINX web root
+      file:
+        path: /usr/share/nginx/html
+        state: directory
+
+    - name: Deploy index.html
+      copy:
+        src: files/index.html
+        dest: /usr/share/nginx/html/index.html
+
+    - name: Configure NGINX reverse proxy
+      copy:
+        dest: /etc/nginx/conf.d/app.conf
+        content: |
+          server {
+              listen 80;
+
+              location / {
+                  root /usr/share/nginx/html;
+                  index index.html;
+              }
+
+              location /submit {
+                  proxy_pass http://10.0.100.67/submit.php;
+                  proxy_set_header Host $host;
+                  proxy_set_header X-Real-IP $remote_addr;
+              }
+          }
+
+    - name: Restart NGINX
+      service:
+        name: nginx
+        state: restarted
+        enabled: yes
+
+
+############################
+# APP TIER (APACHE + PHP)
+############################
+- name: Configure Application Tier
+  hosts: app
+  become: yes
+
+  tasks:
+    - name: Install Apache, PHP, MySQL client
+      yum:
+        name:
+          - httpd
+          - php
+          - php-mysqlnd
+        state: present
+
+    - name: Create Apache web root
+      file:
+        path: /var/www/html
+        state: directory
+
+    - name: Deploy submit.php
+      copy:
+        src: files/submit.php
+        dest: /var/www/html/submit.php
+
+    - name: Start Apache
+      service:
+        name: httpd
+        state: started
+        enabled: yes
