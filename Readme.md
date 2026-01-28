@@ -115,17 +115,16 @@ terraform-3-tier/
 ### [Main.tf file](main.tf)
 
 ### Step 3. Terraform Execution
-```bash
-# Initialize Terraform
-
+- Initialize Terraform
+```
 terraform init
-
-# Plan
-
+```
+- Plan
+```
 terraform plan
-
-# Apply Infrastructure
-
+```
+- Apply Infrastructure
+```
 terraform apply
 ```
 
