@@ -1,7 +1,7 @@
 # 3-Tier Infrastructure Deployment Using Terraform Modules & Ansible
 ## Project Overview
 This project demonstrates a real-world 3-tier AWS architecture using Terraform for infrastructure provisioning and Ansible for configuration management.
-## Objective
+## Objective-
 
 To design and deploy a secure, scalable 3-tier web application architecture on AWS using:
 - Terraform for infrastructure provisioning
@@ -318,5 +318,5 @@ Browser → Web Tier (NGINX) → App Tier (Apache + PHP) → RDS (MySQL)
 - HTTP 500 error = Fixed PHP MYSQL Connection
 - Table not Found = Created DB schema
 
-# Summary
+# Summary....
 Designed and deployed a complete 3-tier web application architecture on AWS using Terraform modules and Ansible automation. The project includes a custom VPC with public and private subnets across multiple Availability Zones, an Internet Gateway and NAT Gateway for controlled internet access, and secure routing using route tables and security groups. The web tier, hosted in a public subnet, runs NGINX to serve an HTML registration form and acts as a reverse proxy to the application tier. The application tier, deployed in a private subnet, uses Apache and PHP to process user submissions and securely connect to an Amazon RDS MySQL database hosted in a private subnet. Terraform was used to provision and manage all infrastructure components in a modular and reusable manner, while Ansible automated server configuration, package installation, and application deployment. This project demonstrates real-world DevOps practices including infrastructure as code, configuration management, network isolation, and secure multi-tier application design.
